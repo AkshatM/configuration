@@ -16,6 +16,7 @@ install more apt packages:
         - sources:
             # Chrome browser  
             - google-chrome-stable: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            - bat: https://github.com/sharkdp/bat/releases/download/v0.11.0/bat_0.11.0_amd64.deb 
 
 install snapd packages:
     cmd.run:
