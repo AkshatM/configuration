@@ -10,13 +10,19 @@ install apt packages:
             - texmaker # preferred LaTeX editor
             - git # favour git 2.0.0 and up, if possible
             - snapd # used for some services below
+            - util-linux # used for `runuser`
 
-install more apt packages:
+install google chrome:
     pkg.installed:
         - sources:
-            # Chrome browser  
             - google-chrome-stable: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        - unless: dpkg -l google-chrome-stable
+
+install bat:
+    pkg.installed:
+        - sources:
             - bat: https://github.com/sharkdp/bat/releases/download/v0.11.0/bat_0.11.0_amd64.deb 
+        - unless: dpkg -l bat
 
 install snapd packages:
     cmd.run:
@@ -25,20 +31,12 @@ install snapd packages:
              snap install projectlibre # OpenOffice tools!
              snap install slack --classic # Slack
              snap install skype --classic
-
-install language managers:
+          
+install tfswitch:
     cmd.run:
         - name: |
-             curl https://pyenv.run | bash  # installs pyenv for Python
-             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash  # NVM for Node.js
              curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash # Terraform version manager
-
-# installs Golang version manager from https://github.com/moovweb/gvm
-install gvm:
-    cmd.run:
-        - name: |
-            apt-get install mercurial make binutils bison gcc build-essential
-            bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) # Golang - installs gvm
+        - unless: which tfswitch
 
 # official instructions from docker.com
 install docker:
@@ -49,4 +47,4 @@ install docker:
             add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
             apt-get update
             apt-get install docker-ce docker-ce-cli containerd.io
-        - unless: which docker
+        - unless: docker
