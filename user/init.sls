@@ -4,6 +4,7 @@ guarantee user akshat:
     - home: /home/akshat
     - groups: 
         - sudo
+        - docker
 
 allow passwordless sudo:
   file.append:

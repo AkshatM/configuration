@@ -28,9 +28,25 @@ install snapd packages:
     cmd.run:
         - name: |
              snap install sublime-text --classic  # Sublime Text 3
+        - unless: snap list sublime-text
+
+install projectlibre packages:
+    cmd.run:
+        - name: |
              snap install projectlibre # OpenOffice tools!
-             snap install slack --classic # Slack
-             snap install skype --classic
+        - unless: snap list projectlibre
+
+install slack:
+    cmd.run:
+        - name: |
+             snap install slack --classic
+        - unless: snap list slack
+
+install skype:
+    cmd.run:
+        - name: |
+             snap install skype --classic 
+        - unless: snap list skype
           
 install tfswitch:
     cmd.run:
