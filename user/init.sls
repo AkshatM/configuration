@@ -18,12 +18,6 @@ generate ssh key if not exist:
     - runas: akshat
     - unless: test -f /home/akshat/.ssh/id_rsa
 
-alias cat to bat:
-  file.append:
-    - name: /home/akshat/.bashrc
-    - text:
-       - alias cat="bat"
-
 install pyenv:
     cmd.run:
         - name: |
@@ -44,3 +38,10 @@ install gvm:
             bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) # Golang - installs gvm
         - unless: test -e /home/akshat/.gvm/bin/gvm
 
+modify bashrc:
+  file.append:
+    - name: /home/akshat/.bashrc
+    - text:
+       - alias cat="bat"
+       - export PYENV_ROOT="$HOME/.pyenv"
+       - export PATH="$PYENV_ROOT/bin:$PATH"

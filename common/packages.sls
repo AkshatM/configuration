@@ -14,6 +14,7 @@ install apt packages:
             - git # favour git 2.0.0 and up, if possible
             - snapd # used for some services below
             - util-linux # used for `runuser`
+            - net-tools
             - vim
 
 install vim plugin manager:
