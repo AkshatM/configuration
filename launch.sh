@@ -25,7 +25,7 @@ modify_salt_config() {
 }
 
 apply_salt_highstate() {
-	sudo salt-call state.apply -l info
+	sudo salt-call state.apply -l debug
 }
 
 main() {

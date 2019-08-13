@@ -2,15 +2,30 @@ git ppa:
     pkgrepo.managed:
         - ppa: git-core/ppa
 
+install texlive with tlmgr:
+    cmd.run:
+        - name: wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu && chmod +x ./install-tl-ubuntu && ./install-tl-ubuntu; rm -f ./install-tl-ubuntu
+
 install apt packages:
     pkg.installed:
         - refresh: true
         - pkgs:
-            - texlive-full # base LaTeX installation, all packages included 
             - texmaker # preferred LaTeX editor
             - git # favour git 2.0.0 and up, if possible
             - snapd # used for some services below
             - util-linux # used for `runuser`
+            - vim
+
+install vim plugin manager:
+    cmd.run:
+        - name: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        - unless: test -e ~/.vim/autoload/plug.vim
+
+modify vim settings globally:
+    file.append: 
+        - name: /etc/vim/vimrc
+        - text: 
+            - set number
 
 install google chrome:
     pkg.installed:
@@ -62,5 +77,5 @@ install docker:
             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
             add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
             apt-get update
-            apt-get install docker-ce docker-ce-cli containerd.io
+            apt-get install docker-ce 
         - unless: docker
