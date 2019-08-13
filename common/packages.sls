@@ -2,15 +2,10 @@ git ppa:
     pkgrepo.managed:
         - ppa: git-core/ppa
 
-install texlive with tlmgr:
-    cmd.run:
-        - name: wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu && chmod +x ./install-tl-ubuntu && ./install-tl-ubuntu; rm -f ./install-tl-ubuntu
-
 install apt packages:
     pkg.installed:
         - refresh: true
         - pkgs:
-            - texmaker # preferred LaTeX editor
             - git # favour git 2.0.0 and up, if possible
             - snapd # used for some services below
             - util-linux # used for `runuser`
