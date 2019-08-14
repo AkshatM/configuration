@@ -10,6 +10,7 @@ install apt packages:
             - snapd # used for some services below
             - util-linux # used for `runuser`
             - net-tools
+            - default-jre
             - vim
 
 install vim plugin manager:
