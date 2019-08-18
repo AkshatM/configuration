@@ -12,6 +12,7 @@ install apt packages:
             - net-tools
             - default-jre
             - vim
+            - vlc
 
 install vim plugin manager:
     cmd.run:
