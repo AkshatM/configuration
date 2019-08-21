@@ -45,3 +45,12 @@ modify bashrc:
        - alias cat="bat"
        - export PYENV_ROOT="$HOME/.pyenv"
        - export PATH="$PYENV_ROOT/bin:$PATH"
+
+verify a workspace folder for projects exists:
+  file.directory:
+    - name: /home/akshat/workspace
+    - user: akshat
+    - dir_mode: 755
+    - file_mode: 755
+    - recurse:
+      - user
