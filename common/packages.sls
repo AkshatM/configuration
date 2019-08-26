@@ -9,10 +9,18 @@ install apt packages:
             - git # favour git 2.0.0 and up, if possible
             - snapd # used for some services below
             - util-linux # used for `runuser`
+            # netstat and ipconfig, etc.
             - net-tools
             - default-jre
             - vim
+            # media player
             - vlc
+            # visibility into system
+            - nmon
+            # power management
+            - tlp
+            - tlp-rdw
+            - thermald
 
 install vim plugin manager:
     cmd.run:

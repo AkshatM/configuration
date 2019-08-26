@@ -1,4 +1,6 @@
-
+disable bluetoothd on boot because I do not use it:
+    service.disabled:
+        - name: bluetooth
 
 disable docker on boot for faster startup time:
     service.disabled:
