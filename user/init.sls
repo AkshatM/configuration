@@ -54,3 +54,10 @@ verify a workspace folder for projects exists:
     - file_mode: 755
     - recurse:
       - user
+
+ensure all folders under /home/akshat are owned by akshat:
+  file.directory:
+    - name: /home/akshat/
+    - user: akshat
+    - recurse:
+      - user

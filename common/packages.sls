@@ -17,10 +17,26 @@ install apt packages:
             - vlc
             # visibility into system
             - nmon
-            # power management
-            - tlp
-            - tlp-rdw
-            - thermald
+            # dependency for pyenv 
+            - make 
+            - build-essential 
+            - libssl-dev 
+            - zlib1g-dev 
+            - libbz2-dev
+            - libreadline-dev 
+            - libsqlite3-dev 
+            - wget 
+            - curl 
+            - llvm 
+            - libncurses5-dev 
+            - libncursesw5-dev 
+            - xz-utils 
+            - tk-dev 
+            - libffi-dev 
+            - liblzma-dev 
+            - python-openssl 
+            # manage environment variables in directories
+            - direnv
 
 install vim plugin manager:
     cmd.run:
