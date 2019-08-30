@@ -61,3 +61,9 @@ ensure all folders under /home/akshat are owned by akshat:
     - user: akshat
     - recurse:
       - user
+
+set vim as core editor for my user:
+  git.config_set:
+    - name: core.editor
+    - value: vim
+    - user: akshat
