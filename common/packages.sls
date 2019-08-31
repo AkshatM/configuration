@@ -34,9 +34,11 @@ install apt packages:
             - tk-dev 
             - libffi-dev 
             - liblzma-dev 
-            - python-openssl 
+            - python-openssl
             # manage environment variables in directories
             - direnv
+            # shellcheck for bash
+            - shellcheck
 
 install vim plugin manager:
     cmd.run:
@@ -55,11 +57,6 @@ install google chrome:
             - google-chrome-stable: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         - unless: dpkg -l google-chrome-stable
 
-install bat:
-    pkg.installed:
-        - sources:
-            - bat: https://github.com/sharkdp/bat/releases/download/v0.11.0/bat_0.11.0_amd64.deb 
-        - unless: dpkg -l bat
 
 install snapd packages:
     cmd.run:

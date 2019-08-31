@@ -1,0 +1,45 @@
+#!/bin/bash 
+
+# This is a simple directory navigation script that allows me to jump between
+# active projects and system configuration. To use, you *must* source this script
+# `source ./nav foo` will cd you into project `foo` in your workspace directory.
+
+# This script automatically starts virtualenvs if they exist for the directory
+# you are trying to go into. Virtualenv names must match search terms by prefix.
+
+moveto() {
+
+	if [ -z "${1}" ] ; then
+		system_config
+		return
+	fi
+
+        existing_directory=$(ls ~/workspace/ | grep "^${1}" | head -1)
+        if [ -z "${existing_directory}" ] ; then
+        	echo "No such directory found."
+        else
+        	cd ~/workspace/${existing_directory} || return
+		enable_active_prompt ${existing_directory}
+        fi
+}
+
+disable_active_prompt() {
+	pyenv deactivate > /dev/null 2>&1
+}
+
+enable_active_prompt() {
+	disable_active_prompt
+	if [ ! -z $(pyenv versions --bare | grep "^${1}") ]; then
+        	pyenv activate ${1}
+        fi
+}
+
+system_config() {
+	# hardcoded special case - if ${1} is empty, then go to Salt file root
+	disable_active_prompt
+	cd {{ opts['file_roots']['base'][0] }} || return
+}
+
+
+moveto ${1}
+
