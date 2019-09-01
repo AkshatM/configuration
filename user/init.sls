@@ -65,13 +65,6 @@ verify a workspace folder for projects exists:
     - recurse:
       - user
 
-ensure all folders under /home/akshat are owned by akshat:
-  file.directory:
-    - name: /home/akshat/
-    - user: akshat
-    - recurse:
-      - user
-
 set vim as core editor for my user:
   git.config_set:
     - name: core.editor

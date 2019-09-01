@@ -13,3 +13,7 @@ disable salt-minion on boot for faster startup time:
 disable snapd on boot for faster startup time:
     service.disabled:
         - name: snapd
+
+enable collectd at boot:
+    service.enabled:
+        - name: collectd

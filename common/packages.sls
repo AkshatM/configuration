@@ -36,9 +36,7 @@ install apt packages:
             - libffi-dev 
             - liblzma-dev 
             - python-openssl
-            # manage environment variables in directories
-            - direnv
-            # shellcheck for bash
+            # static analysis tool for bash scripts
             - shellcheck
 
 install vim plugin manager:
