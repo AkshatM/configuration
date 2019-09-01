@@ -17,6 +17,7 @@ install apt packages:
             - vlc
             # visibility into system
             - nmon
+            - sysstat
             # dependency for pyenv 
             - make 
             - build-essential 
