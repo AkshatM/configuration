@@ -10,7 +10,6 @@ modify .profile:
     - source: salt://user/files/.profile
     - template: jinja
 
-
 create nav script:
   file.managed:
     - name: /usr/bin/navigate

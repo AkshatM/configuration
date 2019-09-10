@@ -4,6 +4,10 @@ This sets up my own custom development environment on any Ubuntu machine that I 
 
 # Installation
 
-Simply run `launch.sh`, and you should be golden. You can run as many times as desired. 
+Run 
 
-To distribute this on a brand new machine, it's advised to copy a cloned version of this repo to a USB stick and run from there. 
+    git clone git://github.com/AkshatM/configuration.git
+
+in your home directory. This will create a read-only copy.
+ 
+Then run `sudo ./launch.sh`, and you should be golden. You can run as many times as desired.

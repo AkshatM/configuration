@@ -65,6 +65,20 @@ verify a workspace folder for projects exists:
     - recurse:
       - user
 
+set git email:
+  git.config_set:
+    - name: user.email
+    - value: akshatm.bkk@gmail.com
+    - global: True
+    - user: akshat
+
+set git username:
+  git.config_set:
+    - name: user.name
+    - value: Akshat Mahajan
+    - global: True
+    - user: akshat
+
 set vim as core editor for my user:
   git.config_set:
     - name: core.editor
