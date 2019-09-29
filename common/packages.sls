@@ -80,6 +80,14 @@ install skype:
         - name: |
              snap install skype --classic 
         - unless: snap list skype
+
+install packer:
+    cmd.run:
+        - name: |
+            curl -LO https://raw.github.com/robertpeteuil/packer-installer/master/packer-install.sh
+            chmod +x packer-install.sh
+            ./packer-install.sh
+        - unless: which packer
           
 install tfswitch:
     cmd.run:

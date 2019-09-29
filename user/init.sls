@@ -5,6 +5,7 @@ guarantee user akshat:
     - groups: 
         - sudo
         - docker
+        - root
 
 allow passwordless sudo:
   file.append:
@@ -17,6 +18,11 @@ generate ssh key if not exist:
     - name: ssh-keygen -q -N '' -f /home/akshat/.ssh/id_rsa
     - runas: akshat
     - unless: test -f /home/akshat/.ssh/id_rsa
+
+generate ssh key if not exist for root:
+  cmd.run:
+    - name: ssh-keygen -q -N '' -f /root/.ssh/id_rsa
+    - unless: test -f /root/.ssh/id_rsa
 
 install pyenv:
     cmd.run:
