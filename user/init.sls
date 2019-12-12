@@ -62,9 +62,27 @@ install bat:
         - name: installed_bat
         - value: true
 
-verify a workspace folder for projects exists:
+create workspace directory for all projects:
   file.directory:
     - name: /home/akshat/workspace
+    - user: akshat
+    - dir_mode: 755
+    - file_mode: 755
+    - recurse:
+      - user
+
+create go directory for all Golang projects:
+  file.directory:
+    - name: /home/akshat/workspace/go
+    - user: akshat
+    - dir_mode: 755
+    - file_mode: 755
+    - recurse:
+      - user
+
+convert ownership of files in user directory to user:
+  file.directory:
+    - name: /home/akshat/
     - user: akshat
     - dir_mode: 755
     - file_mode: 755

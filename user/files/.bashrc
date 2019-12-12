@@ -128,6 +128,7 @@ export NVM_DIR="$HOME/.nvm"
 
 {% if grains.get("installed_gvm") %}
 [[ -s "/home/akshat/.gvm/scripts/gvm" ]] && source "/home/akshat/.gvm/scripts/gvm"
+export GOPATH=/home/akshat/workspace/go
 {% endif %}
 
 {% if grains.get("installed_pyenv") %}

@@ -26,18 +26,25 @@ install apt packages:
             - libbz2-dev
             - libreadline-dev 
             - libsqlite3-dev 
-            - wget 
+            - wget
             - curl 
-            - llvm 
+            - llvm
+            - jq 
             - libncurses5-dev 
             - libncursesw5-dev 
             - xz-utils 
             - tk-dev 
             - libffi-dev 
             - liblzma-dev 
+            - python-dev
+            - python3-dev
+            - imagemagick
             - python-openssl
             # static analysis tool for bash scripts
             - shellcheck
+            - linux-tools-common 
+            - linux-tools-generic 
+            - linux-tools-{{ salt['cmd.run_stdout']('uname -r') }}
 
 install vim plugin manager:
     cmd.run:
