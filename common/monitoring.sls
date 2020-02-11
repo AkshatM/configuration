@@ -11,9 +11,10 @@ modify collectd configuration:
         - template: jinja
         - onlyif: test -e /etc/collectd/collectd.conf
 
+{% if grains.get("enable_collectd") %}
 ensure collectd is running:
     service.running:
         - name: collectd
         - watch: 
             - file: /etc/collectd/collectd.conf
- 
+{% endif %}
