@@ -1,11 +1,15 @@
 #!/bin/bash 
 
 # This is a simple directory navigation script that allows me to jump between
-# active projects and system configuration. To use, you *must* source this script
+# active projects and system configuration. To use, you *must* source this script:
 # `source ./nav foo` will cd you into project `foo` in your workspace directory.
+# In my particular setup, I've added a `source ./navigate` in my .bashrc, and can then
+# use `nav foo` to cd me into the project whose prefix begins with `foo`.
 
 # This script automatically starts virtualenvs if they exist for the directory
 # you are trying to go into. Virtualenv names must match search terms by prefix.
+
+# Note: this project might be better served by using `desk` instead: https://github.com/jamesob/desk
 
 moveto() {
 

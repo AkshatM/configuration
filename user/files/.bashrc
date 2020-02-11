@@ -144,3 +144,9 @@ eval "$(pyenv virtualenv-init -)"
 {% if grains.get("custom_navigation") %}
 alias nav='source /usr/bin/navigate'
 {% endif %}
+
+gvm use go1.13
+
+if [ -f .bash_temporary ]; then
+    source .bash_temporary
+fi

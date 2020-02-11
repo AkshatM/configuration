@@ -80,14 +80,16 @@ create go directory for all Golang projects:
     - recurse:
       - user
 
-convert ownership of files in user directory to user:
+{% for directory in ['pkg', 'src', 'bin'] %}
+create go/{{ directory }} directory for all Golang projects:
   file.directory:
-    - name: /home/akshat/
+    - name: /home/akshat/workspace/go/{{ directory }}
     - user: akshat
     - dir_mode: 755
     - file_mode: 755
     - recurse:
       - user
+{% endfor %}
 
 set git email:
   git.config_set:
