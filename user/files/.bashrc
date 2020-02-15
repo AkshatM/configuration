@@ -147,6 +147,6 @@ alias nav='source /usr/bin/navigate'
 
 gvm use go1.13
 
-if [ -f .bash_temporary ]; then
-    source .bash_temporary
+if [ -f /home/akshat/.bash_temporary ]; then
+    source /home/akshat/.bash_temporary
 fi
