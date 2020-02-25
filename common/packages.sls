@@ -70,6 +70,18 @@ install snapd packages:
              snap install sublime-text --classic  # Sublime Text 3
         - unless: snap list sublime-text
 
+install protobuf package:
+    cmd.run:
+        - name: |
+             snap install protobuf
+        - unless: snap list protobuf
+
+install kubectl:
+    cmd.run:
+        - name: |
+             snap install kubectl
+        - unless: snap list kubectl
+
 install projectlibre packages:
     cmd.run:
         - name: |
