@@ -46,7 +46,7 @@ install nvm:
 install gvm:
     cmd.run:
         - name: |
-            apt-get install mercurial make binutils bison gcc build-essential
+            apt-get install -y mercurial make binutils bison gcc build-essential
             bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) # Golang - installs gvm
         - unless: test -e /home/akshat/.gvm/bin/gvm
     grains.present:

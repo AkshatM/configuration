@@ -124,3 +124,23 @@ install docker:
             apt-get update -y
             apt-get install -y docker-ce 
         - unless: docker
+
+install helm:
+    cmd.run: 
+        - name: |
+           curl https://helm.baltorepo.com/organization/signing.asc | sudo apt-key add -
+           apt-get install apt-transport-https --yes
+           echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+           apt-get update -y
+           apt-get install -y helm
+
+install docker-compose:
+    cmd.run:
+        - name: |
+           sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+           sudo chmod +x /usr/local/bin/docker-compose
+
+install blackbox:
+    pkg.installed:
+        - sources:
+            - blackbox: salt://common/files/stack-blackbox_1.0-502_all.deb
