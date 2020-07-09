@@ -1,0 +1,17 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Gofmt",
+		"HTMLBeautify",
+		"Origami",
+		"Package Control",
+		"Protobuf Syntax Hightlighting",
+		"sublack",
+		"TerminalView",
+		"Terraform"
+	]
+}

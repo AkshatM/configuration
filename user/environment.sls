@@ -21,3 +21,13 @@ create nav script:
     - name: custom_navigation
     - value: true
 
+{% if not grains.get("sublime_text_configured") %}
+add sublime-text settings:
+  file.recurse:
+    - name: /home/akshat/.config/sublime-text-3/Packages/User
+    - source: salt://user/files/sublime-text-settings
+    - user: akshat
+  grains.present:
+    - name: sublime_text_configured
+    - value: true
+{% endif %}
