@@ -73,13 +73,13 @@ install snapd packages:
 install protobuf package:
     cmd.run:
         - name: |
-             snap install protobuf
+             snap install protobuf --classic
         - unless: snap list protobuf
 
 install kubectl:
     cmd.run:
         - name: |
-             snap install kubectl
+             snap install kubectl --classic
         - unless: snap list kubectl
 
 install projectlibre packages:
@@ -143,4 +143,4 @@ install docker-compose:
 install blackbox:
     pkg.installed:
         - sources:
-            - blackbox: salt://common/files/stack-blackbox_1.0-502_all.deb
+            - stack-blackbox: salt://common/files/stack-blackbox_1.0-502_all.deb
