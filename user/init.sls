@@ -42,16 +42,6 @@ install nvm:
         - name: installed_nvm
         - value: true
 
-# installs Golang version manager from https://github.com/moovweb/gvm
-install gvm:
-    cmd.run:
-        - name: |
-            apt-get install -y mercurial make binutils bison gcc build-essential
-            bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) # Golang - installs gvm
-        - unless: test -e /home/akshat/.gvm/bin/gvm
-    grains.present:
-        - name: installed_gvm
-        - value: true
 
 install bat:
     pkg.installed:
@@ -70,26 +60,6 @@ create workspace directory for all projects:
     - file_mode: 755
     - recurse:
       - user
-
-create go directory for all Golang projects:
-  file.directory:
-    - name: /home/akshat/workspace/go
-    - user: akshat
-    - dir_mode: 755
-    - file_mode: 755
-    - recurse:
-      - user
-
-{% for directory in ['pkg', 'src', 'bin'] %}
-create go/{{ directory }} directory for all Golang projects:
-  file.directory:
-    - name: /home/akshat/workspace/go/{{ directory }}
-    - user: akshat
-    - dir_mode: 755
-    - file_mode: 755
-    - recurse:
-      - user
-{% endfor %}
 
 set git email:
   git.config_set:

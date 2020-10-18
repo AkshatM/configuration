@@ -8,7 +8,9 @@ install apt packages:
         - pkgs:
             - git # favour git 2.0.0 and up, if possible
             - snapd # used for some services below
+            - gnome-tweaks
             - util-linux # used for `runuser`
+            - htop
             # netstat and ipconfig, etc.
             - net-tools
             - default-jre

@@ -126,10 +126,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 {% endif %}
 
-{% if grains.get("installed_gvm") %}
-[[ -s "/home/akshat/.gvm/scripts/gvm" ]] && source "/home/akshat/.gvm/scripts/gvm"
-export GOPATH=/home/akshat/workspace/go
-{% endif %}
 
 {% if grains.get("installed_pyenv") %}
 export PYENV_ROOT="$HOME/.pyenv"
@@ -145,7 +141,9 @@ eval "$(pyenv virtualenv-init -)"
 alias nav='source /usr/bin/navigate'
 {% endif %}
 
-gvm use go1.13
+{% if grains.get("installed_g") %}
+export GOPATH="$HOME/workspace/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+{% endif %}
 
 if [ -f /home/akshat/.bash_temporary ]; then
     source /home/akshat/.bash_temporary
