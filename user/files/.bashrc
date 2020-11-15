@@ -148,3 +148,5 @@ export GOPATH="$HOME/workspace/go"; export GOROOT="$HOME/.go"; export PATH="$GOP
 if [ -f /home/akshat/.bash_temporary ]; then
     source /home/akshat/.bash_temporary
 fi
+
+eval "$(starship init bash)"

@@ -1,0 +1,18 @@
+add_newline = false
+
+[directory]
+truncate_to_repo = false
+truncation_length = 8
+truncation_symbol = "…/"
+style="bold cyan"
+
+[python]
+format = "via [${symbol}${version}]($style) "
+symbol = "py "
+
+[nodejs]
+symbol = "node "
+
+[golang]
+symbol = "go "
+style = "bold red"

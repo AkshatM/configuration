@@ -1,3 +1,28 @@
+{% if not grains.get("installed_starship") %}
+install nerdfonts for starship:
+    archive.extracted:
+        - name: /home/akshat/.fonts/Ubuntu
+        - source: salt://user/files/Ubuntu.zip
+    cmd.run:
+        - name: fc-cache -fv
+
+install starship:
+    cmd.run:
+        - name: curl -fsSL https://starship.rs/install.sh --force | bash
+        - unless: which starship 
+    grains.present:
+        - name: installed_starship
+        - value: true
+{% endif %}
+
+update starship configuration:
+  file.managed:
+    - name: /home/akshat/.config/starship.toml
+    - source: salt://user/files/starship.toml
+    - user: akshat
+    - mode: 644
+
+
 modify .bashrc:
   file.managed:
     - name: /home/akshat/.bashrc
@@ -9,6 +34,7 @@ modify .profile:
     - name: /home/akshat/.profile
     - source: salt://user/files/.profile
     - template: jinja
+
 
 create nav script:
   file.managed:
