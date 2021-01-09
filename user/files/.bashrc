@@ -142,7 +142,7 @@ alias nav='source /usr/bin/navigate'
 {% endif %}
 
 {% if grains.get("installed_g") %}
-export GOPATH="$HOME/workspace/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
 {% endif %}
 
 if [ -f /home/akshat/.bash_temporary ]; then

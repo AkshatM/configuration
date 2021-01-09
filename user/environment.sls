@@ -54,8 +54,8 @@ install g:
     cmd.run:
         - name: curl -sSL https://git.io/g-install | bash -s -- -y
         - env:
-          - GOPATH: '/home/akshat/workspace/go'
-        - unless: test -e /home/akshat/workspace/go/bin/g
+          - GOPATH: '/home/akshat/go'
+        - unless: test -e /home/akshat/go/bin/g
     grains.present:
         - name: installed_g
         - value: true

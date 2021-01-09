@@ -9,9 +9,12 @@
 		"HTMLBeautify",
 		"Origami",
 		"Package Control",
+		"Pretty JSON",
 		"Protobuf Syntax Hightlighting",
+		"Protocol Buffer Syntax",
 		"sublack",
 		"TerminalView",
-		"Terraform"
+		"Terraform",
+		"TypeScript Syntax"
 	]
 }

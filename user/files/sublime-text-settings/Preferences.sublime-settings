@@ -1,10 +1,28 @@
 {
+	"binary_file_patterns":
+	[
+		"*.jpg",
+		"*.jpeg",
+		"*.png",
+		"*.gif",
+		"*.ttf",
+		"*.tga",
+		"*.dds",
+		"*.ico",
+		"*.eot",
+		"*.pdf",
+		"*.swf",
+		"*.jar",
+		"*.zip",
+		"node_modules/**",
+		"bower_components/**"
+	],
 	"color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
-	"font_size": 10,
+	"font_size": 12,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-	"translate_tabs_to_spaces": true,
-	"theme": "Adaptive.sublime-theme"
+	"theme": "Adaptive.sublime-theme",
+	"translate_tabs_to_spaces": true
 }
