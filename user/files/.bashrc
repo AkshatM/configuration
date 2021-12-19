@@ -133,6 +133,10 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 {% endif %}
 
+{% if grains.get("installed_rust") %}
+export PATH="$HOME/.cargo/bin:$PATH"
+{% endif %}
+
 {% if grains.get("installed_pyenv_virtualenv") %}
 eval "$(pyenv virtualenv-init -)"
 {% endif %}

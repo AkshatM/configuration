@@ -2,7 +2,7 @@
 
 set -x
 
-SALT_VERSION='v2019.2.0'
+SALT_VERSION="${DEPLOY_ENV:-v3003}"
 
 # This translates to the directory this bash script is in.
 FILE_ROOT="$(dirname $(realpath $0))"
@@ -31,7 +31,7 @@ modify_salt_config() {
 }
 
 apply_salt_highstate() {
-	sudo salt-call state.apply -l debug
+	sudo -E salt-call state.apply -l debug
 }
 
 main() {

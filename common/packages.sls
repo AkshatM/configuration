@@ -48,6 +48,14 @@ install apt packages:
             - linux-tools-generic 
             - linux-tools-{{ salt['cmd.run_stdout']('uname -r') }}
 
+install rust:
+    cmd.run:
+        - name: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        - unless: which cargo
+    grains.present:
+        - name: installed_rust
+        - value: true 
+
 install vim plugin manager:
     cmd.run:
         - name: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -65,6 +73,8 @@ install google chrome:
             - google-chrome-stable: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         - unless: dpkg -l google-chrome-stable
 
+# installing snap packages in Docker is painfully slow and thus avoided
+{% if not salt['environ.get']('TEST') %}
 
 install snapd packages:
     cmd.run:
@@ -101,6 +111,7 @@ install skype:
         - name: |
              snap install skype --classic 
         - unless: snap list skype
+{% endif %}
 
 install packer:
     cmd.run:
@@ -141,8 +152,3 @@ install docker-compose:
         - name: |
            sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
            sudo chmod +x /usr/local/bin/docker-compose
-
-install blackbox:
-    pkg.installed:
-        - sources:
-            - stack-blackbox: salt://common/files/stack-blackbox_1.0-502_all.deb
