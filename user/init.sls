@@ -27,7 +27,7 @@ generate ssh key if not exist for root:
 install pyenv:
     cmd.run:
         - name: |
-             curl https://pyenv.run | bash  # installs pyenv for Python
+             curl https://pyenv.run | su akshat -c bash  # installs pyenv for Python
         - unless: test -e /home/akshat/.pyenv/bin/pyenv 
     grains.present:
         - name: installed_pyenv

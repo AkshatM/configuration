@@ -2,6 +2,12 @@ git ppa:
     pkgrepo.managed:
         - ppa: git-core/ppa
 
+llvm-13 ppa:
+    pkgrepo.managed:
+        - humanname: LLVM
+        - name: deb http://apt.llvm.org/bionic/   llvm-toolchain-bionic-13  main
+        - key_url: https://apt.llvm.org/llvm-snapshot.gpg.key
+
 install apt packages:
     pkg.installed:
         - refresh: true

@@ -130,6 +130,7 @@ export NVM_DIR="$HOME/.nvm"
 {% if grains.get("installed_pyenv") %}
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 {% endif %}
 
