@@ -1,14 +1,12 @@
-git ppa:
-    pkgrepo.managed:
-        - ppa: git-core/ppa
-
 install apt packages:
     pkg.installed:
         - refresh: true
         - pkgs:
-            - git # favour git 2.0.0 and up, if possible
+            - git-all 
             - snapd # used for some services below
             - gnome-tweaks
+            - clamav
+            - clamav-daemon
             - util-linux # used for `runuser`
             - htop
             # netstat and ipconfig, etc.
