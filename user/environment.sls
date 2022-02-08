@@ -3,12 +3,13 @@ install nerdfonts for starship:
     archive.extracted:
         - name: /home/akshat/.fonts/Ubuntu
         - source: salt://user/files/Ubuntu.zip
+        - enforce_toplevel: false
     cmd.run:
         - name: fc-cache -fv
 
 install starship:
     cmd.run:
-        - name: curl -fsSL https://starship.rs/install.sh --force | bash
+        - name: curl -fsSL https://starship.rs/install.sh | sh -s -- -y
         - unless: which starship 
     grains.present:
         - name: installed_starship
