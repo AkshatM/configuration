@@ -116,9 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-{% if grains.get("installed_bat") %}
-alias cat="bat"
-{% endif %}
+alias cat="batcat"
 
 {% if grains.get("installed_nvm") %}
 export NVM_DIR="$HOME/.nvm"
@@ -142,16 +140,14 @@ export PATH="$HOME/.cargo/bin:$PATH"
 eval "$(pyenv virtualenv-init -)"
 {% endif %}
 
-{% if grains.get("custom_navigation") %}
 alias nav='source /usr/bin/navigate'
-{% endif %}
 
 {% if grains.get("installed_g") %}
 export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
 {% endif %}
 
-if [ -f /home/akshat/.bash_temporary ]; then
-    source /home/akshat/.bash_temporary
+if [ -f /home/akshat-mahajan/.bash_temporary ]; then
+    source /home/akshat-mahajan/.bash_temporary
 fi
 
 eval "$(starship init bash)"

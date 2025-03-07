@@ -1,12 +1,4 @@
 {% if not grains.get("installed_starship") %}
-install nerdfonts for starship:
-    archive.extracted:
-        - name: /home/akshat/.fonts/Ubuntu
-        - source: salt://user/files/Ubuntu.zip
-        - enforce_toplevel: false
-    cmd.run:
-        - name: fc-cache -fv
-
 install starship:
     cmd.run:
         - name: curl -fsSL https://starship.rs/install.sh | sh -s -- -y
@@ -18,21 +10,21 @@ install starship:
 
 update starship configuration:
   file.managed:
-    - name: /home/akshat/.config/starship.toml
+    - name: /home/akshat-mahajan/.config/starship.toml
     - source: salt://user/files/starship.toml
-    - user: akshat
+    - user: akshat-mahajan
     - mode: 644
 
 
 modify .bashrc:
   file.managed:
-    - name: /home/akshat/.bashrc
+    - name: /home/akshat-mahajan/.bashrc
     - source: salt://user/files/.bashrc
     - template: jinja
 
 modify .profile:
   file.managed:
-    - name: /home/akshat/.profile
+    - name: /home/akshat-mahajan/.profile
     - source: salt://user/files/.profile
     - template: jinja
 
@@ -42,7 +34,7 @@ create nav script:
     - name: /usr/bin/navigate
     - source: salt://user/files/navigate
     - template: jinja
-    - user: akshat
+    - user: akshat-mahajan
     - mode: 755 
   grains.present:
     - name: custom_navigation
@@ -53,22 +45,11 @@ create nav script:
 # needs to be installed here as it modifies .bashrc for us, so we have to be careful
 install g:
     cmd.run:
-        - name: curl -sSL https://git.io/g-install | bash -s -- -y
+        - name: curl -sSL https://git.io/g-install | su akshat-mahajan -c 'bash -s --y'
         - env:
-          - GOPATH: '/home/akshat/go'
-        - unless: test -e /home/akshat/go/bin/g
+          - GOPATH: '/home/akshat-mahajan/go'
+        - unless: test -e /home/akshat-mahajan/go/bin/g
     grains.present:
         - name: installed_g
         - value: true
-{% endif %}
-
-{% if not grains.get("sublime_text_configured") %}
-add sublime-text settings:
-  file.recurse:
-    - name: /home/akshat/.config/sublime-text-3/Packages/User
-    - source: salt://user/files/sublime-text-settings
-    - user: akshat
-  grains.present:
-    - name: sublime_text_configured
-    - value: true
 {% endif %}

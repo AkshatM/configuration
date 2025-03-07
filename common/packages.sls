@@ -1,62 +1,10 @@
-install apt packages:
-    pkg.installed:
-        - refresh: true
-        - pkgs:
-            - git-all 
-            - snapd # used for some services below
-            - gnome-tweaks
-            - clamav
-            - clamav-daemon
-            - util-linux # used for `runuser`
-            - htop
-            # netstat and ipconfig, etc.
-            - net-tools
-            - default-jre
-            - vim
-            # media player
-            - vlc
-            # visibility into system
-            - nmon
-            - sysstat
-            # dependency for pyenv 
-            - make 
-            - build-essential 
-            - libssl-dev 
-            - zlib1g-dev 
-            - libbz2-dev
-            - libreadline-dev 
-            - libsqlite3-dev 
-            - wget
-            - curl 
-            - jq 
-            - libncurses5-dev 
-            - libncursesw5-dev 
-            - xz-utils 
-            - tk-dev 
-            - libffi-dev 
-            - liblzma-dev 
-            - python-dev
-            - python3-dev
-            - imagemagick
-            - python-openssl
-            # static analysis tool for bash scripts
-            - shellcheck
-            - linux-tools-common 
-            - linux-tools-generic 
-            - linux-tools-{{ salt['cmd.run_stdout']('uname -r') }}
-
 install rust:
     cmd.run:
-        - name: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        - name: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | su akshat-mahajan -c 'sh -s -- -y'
         - unless: which cargo
     grains.present:
         - name: installed_rust
         - value: true 
-
-install vim plugin manager:
-    cmd.run:
-        - name: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        - unless: test -e ~/.vim/autoload/plug.vim
 
 modify vim settings globally:
     file.append: 
@@ -72,18 +20,6 @@ install google chrome:
 
 # installing snap packages in Docker is painfully slow and thus avoided
 {% if not salt['environ.get']('TEST') %}
-
-install snapd packages:
-    cmd.run:
-        - name: |
-             snap install sublime-text --classic  # Sublime Text 3
-        - unless: snap list sublime-text
-
-install protobuf package:
-    cmd.run:
-        - name: |
-             snap install protobuf --classic
-        - unless: snap list protobuf
 
 install kubectl:
     cmd.run:
@@ -103,11 +39,6 @@ install slack:
              snap install slack --classic
         - unless: snap list slack
 
-install skype:
-    cmd.run:
-        - name: |
-             snap install skype --classic 
-        - unless: snap list skype
 {% endif %}
 
 install packer:
@@ -125,14 +56,20 @@ install tfswitch:
         - unless: which tfswitch
 
 # official instructions from docker.com
-install docker:
+install docker and docker-compose:
     cmd.run:
         - name: |
-            apt-get install -y apt-transport-https ca-certificates gnupg-agent software-properties-common
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-            apt-get update -y
-            apt-get install -y docker-ce 
+                sudo apt-get install -y ca-certificates curl
+                sudo install -m 0755 -d /etc/apt/keyrings
+                sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+                sudo chmod a+r /etc/apt/keyrings/docker.asc
+                echo \
+                     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+                     $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+                     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+                sudo apt-get update -y
+                apt-get install -y apt-transport-https ca-certificates gnupg-agent software-properties-common
+                sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
         - unless: docker
 
 install helm:
@@ -143,9 +80,3 @@ install helm:
            echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
            apt-get update -y
            apt-get install -y helm
-
-install docker-compose:
-    cmd.run:
-        - name: |
-           sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-           sudo chmod +x /usr/local/bin/docker-compose

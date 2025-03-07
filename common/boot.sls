@@ -1,5 +1,5 @@
-disable bluetoothd on boot because I do not use it:
-    service.disabled:
+enable bluetooth on startup for my personal keyboard and mouse:
+    service.enabled:
         - name: bluetooth
 
 disable docker on boot for faster startup time:

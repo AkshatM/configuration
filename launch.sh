@@ -2,8 +2,6 @@
 
 set -x
 
-SALT_VERSION="${DEPLOY_ENV:-v3003}"
-
 # This translates to the directory this bash script is in.
 FILE_ROOT="$(dirname $(realpath $0))"
 
@@ -14,9 +12,13 @@ install_curl() {
 
 # base installation of Salt - will gladly reinstall Salt for us.
 install_salt() {
-        which curl || install_curl
-	curl -L https://bootstrap.saltstack.com -o bootstrap_salt.sh && sudo sh bootstrap_salt.sh git ${SALT_VERSION}
-	rm bootstrap_salt.sh
+	# Ensure keyrings dir exists
+	mkdir -p /etc/apt/keyrings
+	# Download public key
+	curl -fsSL https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public | sudo tee /etc/apt/keyrings/salt-archive-keyring.pgp
+	# Create apt repo target configuration
+	curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/download/salt.sources | sudo tee /etc/apt/sources.list.d/salt.sources
+	apt-get install -y salt-minion
 }
 
 # overwrites the default salt config with our preferences
@@ -31,6 +33,10 @@ modify_salt_config() {
 }
 
 apply_salt_highstate() {
+	# install packages here as salt hates me
+	apt-get install -y git-all snapd gnome-tweaks util-linux \
+		clamav clamav-daemon htop net-tools default-jre vim vlc nmon jq curl \
+		imagemagick python3-dev linux-tools-common linux-tools-generic shellcheck bat dbus-x11
 	sudo -E salt-call state.apply -l debug
 }
 
