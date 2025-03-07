@@ -39,6 +39,11 @@ install slack:
              snap install slack --classic
         - unless: snap list slack
 
+install VS code:
+    cmd.run:
+        - name: |
+             snap install code --classic
+        - unless: snap list code
 {% endif %}
 
 install packer:
@@ -80,3 +85,8 @@ install helm:
            echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
            apt-get update -y
            apt-get install -y helm
+
+install ollama:
+    cmd.run:
+        - name: curl -fsSL https://ollama.com/install.sh | su akshat-mahajan -c 'sh -s -- -y'
+        - unless: which ollama
